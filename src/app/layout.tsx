@@ -1,15 +1,19 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
+import { LanguageProvider } from '@/context/LanguageContext'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: '일할지도 — 일하고 배우고 여행까지',
-  description: '1인 기업가·프리랜서를 위한 AI 워케이션 통합 플랫폼. 업무 공간 + 성장 프로그램 + 로컬 힐링을 하나의 경험으로.',
-  keywords: ['워케이션', '일할지도', '1인 기업가', '프리랜서', '원격근무', 'workation'],
+  title: 'Wakation — Stay. Work. Grow.',
+  description: '일, 쉼, 성장이 한 흐름으로 이어지는 워케이션. 숙소·액티비티·공유오피스·러닝을 하나의 여정으로.',
+  keywords: '워케이션, 워크케이션, 프리랜서, 1인기업가, 제주, 강원, 성장캠프',
   openGraph: {
-    title: '일할지도 — 일하고 배우고 여행까지',
-    description: '1인 기업가·프리랜서를 위한 AI 워케이션 통합 플랫폼',
+    title: 'Wakation — Stay. Work. Grow.',
+    description: '일, 쉼, 성장이 한 흐름으로 이어지는 워케이션',
     locale: 'ko_KR',
     type: 'website',
   },
@@ -17,11 +21,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className="h-full">
-      <body className="min-h-full flex flex-col antialiased">
-        <Navbar />
-        <div className="flex-1">{children}</div>
-        <Footer />
+    <html lang="ko" className={`${inter.variable} scroll-smooth`}>
+      <body className="min-h-full bg-white text-gray-900 antialiased flex flex-col">
+        <LanguageProvider>
+          <Navbar />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )
